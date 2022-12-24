@@ -1,0 +1,138 @@
+.headerSpotify {
+  max-width: 20%;
+  margin: 10px;
+
+  background: rgb(217, 225, 224);
+  height: 100vh;
+  position: fixed;
+  left: -10px;
+  top: -10px;
+  width: 100%;
+
+  & .content {
+    padding-top: 30px;
+    padding-bottom: 10px;
+    position: relative;
+    max-width: 85%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    text-decoration: none;
+    flex-direction: column;
+    & .logo {
+      cursor: pointer;
+      padding: 0 10px;
+      & h2 {
+        & a {
+          color: #5cc961;
+        }
+      }
+    }
+
+    & .flexTest {
+      flex: 1;
+    }
+    & .flexflexTestTwo {
+      flex: 2;
+    }
+
+    & .navItem {
+      margin-top: 20px;
+      & .iconSearch {
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+
+        margin-top: 15px;
+        padding: 10px;
+
+        cursor: pointer;
+        border-radius: 20px;
+        transition: all 0.2s ease-in-out;
+        /* transition: ease-in 0.2s; */
+
+        & p {
+          margin-left: 10px;
+        }
+        &:hover {
+          transform: scale(1.09);
+          border-radius: 20px;
+          background: #c7cdca;
+          font-weight: 600;
+          /* border: 1px solid #3c5b64; */
+        }
+      }
+    }
+
+    & .reckontly {
+      margin-top: 10px;
+
+      font-weight: 500;
+      font-size: 15px;
+      opacity: 0.5;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    & .playNowBlock {
+      padding: 7px 0;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+
+      & .userBlock {
+        display: flex;
+        align-items: center;
+
+        /* border: 1px solid #374855; */
+        padding: 10px;
+        border-radius: 20px;
+        background: #cff8de8c;
+
+        box-shadow: 3px 3px 10px #bac8e6;
+
+        div {
+          flex-direction: column;
+          margin-left: 15px;
+          & h4 {
+            font-size: 17px;
+            font-weight: 500;
+          }
+          p {
+            font-size: 15px;
+            color: #7c7d7e;
+          }
+        }
+
+        & .imgAva {
+          width: 50px;
+          height: 50px;
+          border-radius: 50px;
+        }
+      }
+
+      & p {
+        margin-top: 3px;
+        font-size: 12px;
+        font-weight: 300;
+      }
+    }
+    & .downBLock {
+      & .instal {
+        display: flex;
+        gap: 20px;
+        padding: 10px 2px;
+        border-bottom: 1px solid #fff;
+      }
+      & .userBlockFooter {
+        display: flex;
+        gap: 20px;
+        padding: 10px 2px;
+      }
+    }
+  }
+}
