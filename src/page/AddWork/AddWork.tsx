@@ -2,31 +2,25 @@ import * as React from "react";
 import styles from "./AddPost.module.scss";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import axios from "../../axios";
-import { Checkbox, NativeSelect } from "@mui/material";
-import { INomenclatureProps } from "../../type/data";
-import dayjs, { Dayjs } from "dayjs";
-import Stack from "@mui/material/Stack";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-/* import { DatePicker } from "@material-ui/pickers"; */
+import axios from "../../api/axios";
+import { Checkbox } from "@mui/material";
+import { IProduct } from "../../type/data";
 import Button from "@mui/material/Button";
-
+import { AddOrderField } from "./AddOrderField";
 import { useNavigate, useParams } from "react-router-dom";
 
 import NativePickers from "../../components/NativePickers";
+import { getNomenclatures } from "../../api/workOrders/workOrders.requests";
 
 export default function AddWork() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [number, setNumber] = React.useState("");
   const [isFinished, setIsFinished] = React.useState(false);
-  const [material, setMaterial] = React.useState(1);
-  const [product, setProduct] = React.useState(1);
+  const [selectedMaterialId, setSelectedMaterialId] = React.useState(1);
+  const [selectedProductId, setSelectedProductId] = React.useState(1);
   const [date, setData] = React.useState<null | string>(null);
 
-  const [products, setProducts] = React.useState<INomenclatureProps[]>([]);
+  const [products, setProducts] = React.useState<IProduct[]>([]);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -34,7 +28,7 @@ export default function AddWork() {
   const isEdit = Boolean(id);
 
   React.useEffect(() => {
-    axios.get("nomenclatures/").then(({ data }) => setProducts(data.results));
+    getNomenclatures().then(({ data }) => setProducts(data.results));
 
     if (id) {
       try {
@@ -42,8 +36,8 @@ export default function AddWork() {
           setNumber(data.number);
           setData(data.start_date);
           setIsFinished(data.is_finished);
-          setMaterial(data.material.id);
-          setProduct(data.product.id);
+          setSelectedMaterialId(data.material.id);
+          setSelectedProductId(data.product.id);
           setIsLoading(true);
         });
       } catch (error) {
@@ -64,24 +58,20 @@ export default function AddWork() {
       const find = {
         number,
         start_date: date,
-        material: material,
-        product: product,
+        material: selectedMaterialId,
+        product: selectedProductId,
         is_finished: isFinished,
       };
 
       const { data } = isEdit
         ? await axios.put(`workorders/${id}/`, find)
         : await axios.post("workorders/", find);
-      /*  const _id = isEdit ? id : data._id; */
 
       navigate("/");
     } catch (error) {
-      console.log(error);
       alert("Ошибка при создании заказы!");
     }
   };
-
-  console.log(products);
 
   return (
     <>
@@ -122,54 +112,24 @@ export default function AddWork() {
           />
         </div>
 
-        <div className={styles.container}>
-          <div className={styles.textDecs}>
-            <h4>Материал:</h4>
-          </div>
-          {isLoading ? (
-            <TextField
-              id="outlined-select-currency"
-              select
-              label="Select"
-              defaultValue={material}
-              onChange={(e) => setMaterial(Number(e.target.value))}
-              helperText="Please select your currency"
-            >
-              {products.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.code + " " + option.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          ) : (
-            <h2>Загрузка</h2>
-          )}
-        </div>
-
-        <div className={styles.container}>
-          <div className={styles.textDecs}>
-            <h4>Продукция:</h4>
-          </div>
-          {isLoading ? (
-            <TextField
-              id="outlined-select-currency"
-              select
-              label="Select"
-              defaultValue={product}
-              onChange={(e) => setProduct(Number(e.target.value))}
-              helperText="Please select your currency"
-            >
-              {products.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.code + " " + option.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          ) : (
-            <h2>Загрузка</h2>
-          )}
-        </div>
-        <div></div>
+        <AddOrderField
+          title="Материал:"
+          fieldLabel="Материал:"
+          onChange={(e) => setSelectedMaterialId(Number(e.target.value))}
+          helperText="Выберите значение"
+          isLoading={isLoading}
+          products={products}
+          selectedProductId={selectedMaterialId}
+        />
+        <AddOrderField
+          title="Продукция"
+          fieldLabel="Продукция"
+          onChange={(e) => setSelectedProductId(Number(e.target.value))}
+          helperText="Выберите значение"
+          isLoading={isLoading}
+          products={products}
+          selectedProductId={selectedProductId}
+        />
       </Box>
 
       <div className={styles.ml}>

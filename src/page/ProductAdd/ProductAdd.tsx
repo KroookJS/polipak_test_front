@@ -1,27 +1,45 @@
-import { Box, Button, InputAdornment, TextField } from "@mui/material";
-import axios from "../../axios";
+import {
+  alertClasses,
+  Box,
+  Button,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
+import axios from "../../api/axios";
 import React from "react";
 import { useParams } from "react-router-dom";
 import styles from "./ProductAdd.module.scss";
 import { IProductsProps } from "../../type/data";
 
 import ProductBlock from "../../components/Block/ProductsBlock";
+import {
+  getWorkOrdersProduct,
+  postWorkOrdersProduct,
+} from "../../api/workOrders/workOrders.requests";
 
 function ProductAdd() {
   const [products, setProducts] = React.useState<IProductsProps[]>([]);
   const [value, setValue] = React.useState("");
   const { id } = useParams();
 
+  const currentId = id ? id : "";
+
   const addProducts = async () => {
-    await axios.post(`workorders/${id}/products/`, {
-      weight: value,
-    });
+    try {
+      await postWorkOrdersProduct(currentId, { weight: value });
+    } catch (error) {
+      alert(error);
+    }
   };
 
   React.useEffect(() => {
-    axios
-      .get(`/workorders/${id}/products/`)
-      .then(({ data }) => setProducts(data));
+    try {
+      if (id) {
+        getWorkOrdersProduct(id).then(({ data }) => setProducts(data));
+      }
+    } catch (error) {
+      alert(error);
+    }
   }, [addProducts]);
 
   return (

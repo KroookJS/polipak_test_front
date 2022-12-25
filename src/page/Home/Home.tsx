@@ -1,26 +1,32 @@
-import axios from "../../axios";
+import axios from "../../api/axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import DescriptionBlock from "../../components/DescriptionBlock/DescriptionBlock";
 
 import { Search } from "../../components/Search/Search";
-import { IWorkordersProps } from "../../type/data";
+import { IWorkOrders } from "../../type/data";
 import DataTable from "../../components/Block/DataTable";
 
 import PaginationBlock from "../../components/Pagination";
+import { getWorkOrders } from "../../api/workOrders/workOrders.requests";
 
 function Home() {
-  const [items, setItems] = useState<IWorkordersProps[]>();
+  const [items, setItems] = useState<IWorkOrders[]>();
   const [search, setSearch] = useState("");
-  const [totalCount, setTotalCount] = useState(1);
+  const [totalCount, setTotalCount] = useState<number>(1);
   const [page, setPage] = useState(1);
 
   React.useEffect(() => {
-    const response = axios.get(`workorders/?page=${page}`);
-    response.then(({ data }) => setItems(data.results));
-    response.then(({ data }) => setTotalCount(data.count / 10));
-    window.scrollTo(0, 0);
+    try {
+      getWorkOrders({ page }).then(({ data }) => {
+        setItems(data.results);
+        setTotalCount(Math.ceil(data.count / 10));
+      });
+      window.scrollTo(0, 0);
+    } catch (error) {
+      alert(error);
+    }
   }, [page]);
 
   const filterPay = items

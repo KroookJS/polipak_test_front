@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { IWorkordersProps } from "../../type/data";
+import { IWorkOrders } from "../../type/data";
 import styles from "./Block.module.scss";
 import { TbEdit } from "react-icons/tb";
 
-const Block: React.FC<IWorkordersProps> = ({
+const Block: React.FC<IWorkOrders> = ({
   id,
   number,
   is_finished,
@@ -26,7 +26,11 @@ const Block: React.FC<IWorkordersProps> = ({
             <h4>{number}</h4>
           </div>
           <div className={styles.div2}>
-            {is_finished ? <h4 className={styles.green}>Завершен</h4> : <h4 className={styles.red}>Не готов</h4>}
+            {is_finished ? (
+              <h4 className={styles.green}>Завершен</h4>
+            ) : (
+              <h4 className={styles.red}>Не готов</h4>
+            )}
           </div>
           <div className={styles.div3}>
             <h4>{start_date === null ? " - " : start_date}</h4>

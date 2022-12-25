@@ -58,7 +58,7 @@ const NavBar: React.FC = () => {
             >
               <div className={styles.iconSearch}>
                 <AiOutlineFundProjectionScreen style={styleForPaper} />
-                <p>Опереатор заказов</p>
+                <p>Номенклатура</p>
               </div>
             </Link>
           </div>

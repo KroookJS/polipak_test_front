@@ -1,18 +1,16 @@
-import axios from "../../axios";
+import axios from "../../api/axios";
 import { useState, useEffect } from "react";
 import BlockNom from "../../components/Block/BlockNom";
 
-import { INomenclatureProps } from "../../type/data";
+import { IProduct } from "../../type/data";
+import { getNomenclatures } from "../../api/workOrders/workOrders.requests";
 
 function Production() {
-  const [nomenclature, setNomenclature] = useState<INomenclatureProps[]>();
+  const [nomenclature, setNomenclature] = useState<IProduct[]>();
 
   useEffect(() => {
-    axios
-      .get("nomenclatures/")
-      .then(({ data }) => setNomenclature(data.results));
+    getNomenclatures().then(({ data }) => setNomenclature(data.results));
   }, []);
-  console.log(nomenclature);
 
   return (
     <>

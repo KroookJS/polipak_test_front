@@ -1,4 +1,8 @@
-export interface IWorkordersProps {
+export interface IWorkOrdersProps {
+    count: number;
+    results: IWorkOrders[]
+}
+export interface IWorkOrders {
     id: number;
     number: string;
     start_date: null | string;
@@ -14,11 +18,13 @@ export interface IWorkordersProps {
     },
     is_finished: false
 }
-
-export interface INomenclatureProps {
+export interface IProduct {
     id: number;
     code: string;
     name: string;
+}
+export interface IGetProduct {
+    results: IProduct[]
 }
 export interface IProductsProps {
     id: number

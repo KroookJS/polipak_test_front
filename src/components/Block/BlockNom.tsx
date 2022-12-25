@@ -1,8 +1,8 @@
 import React from "react";
-import { INomenclatureProps } from "../../type/data";
+import { IProduct } from "../../type/data";
 import styles from "./Block.module.scss";
 
-const BlockNom: React.FC<INomenclatureProps> = ({ id, code, name }) => {
+const BlockNom: React.FC<IProduct> = ({ id, code, name }) => {
   return (
     <div className={styles.block}>
       <div className={styles.container}>

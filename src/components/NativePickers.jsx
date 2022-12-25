@@ -8,14 +8,9 @@ import { TextField } from "@mui/material";
 export default function NativePickers({ getDataFormat, date }) {
   const [value, setValue] = React.useState(Date.now());
 
-  /* const handleChange = (newValues) => {
-    setValue(newValues);
-  }; */
-
   const dataFormat = `${value.$y}-${value.$M + 1}-${value.$D}`;
   getDataFormat(dataFormat);
 
-  console.log(dataFormat);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack spacing={3}>
