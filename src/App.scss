@@ -7,7 +7,14 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
-
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
 h2 {
   font-weight: 400;
 }
@@ -22,6 +29,7 @@ h3 {
   padding: 10px;
 }
 button {
+  max-width: 300px;
   margin: 15px 0;
   border: none;
   padding: 20px;
@@ -29,9 +37,8 @@ button {
   font-weight: 500;
   border-radius: 20px;
   background: #cff8de8c;
-  box-shadow: 3px 3px 10px #e6bac1;
+  box-shadow: 3px 3px 10px #ffffff;
   color: #000000;
-
   transition: 0.2s ease-in;
 }
 button:hover {
@@ -63,21 +70,80 @@ button:hover {
 
   justify-content: center;
 }
-
-.App-header {
-  min-height: 100vh;
+.seactAndSort {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.sort {
+  position: relative;
+
+  color: #847f7f;
+
+  &__label {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    list-style: none;
+    svg {
+      margin-right: 8px;
+    }
+
+    b {
+      margin-right: 8px;
+    }
+
+    span {
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      cursor: pointer;
+
+      border: solid 2px #00000086;
+      padding: 10px;
+      border-radius: 10px;
+    }
   }
-  to {
-    transform: rotate(360deg);
+
+  &__popup {
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    background: #0101018e;
+    box-shadow: 10px 5px 15px rgba(255, 255, 255, 0.747);
+    border-radius: 0 16px 16px 16px;
+    overflow: hidden;
+    padding: 10px 0;
+    text-decoration: none;
+    list-style: none;
+    ul {
+      overflow: hidden;
+      padding: 0 20px;
+
+      li {
+        list-style: none;
+        font-weight: 300;
+        font-size: 20px;
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: 0.2s ease-in;
+        border-radius: 30px;
+        &:hover {
+          transform: scale(1.1);
+
+          background: #84af99;
+          border-radius: 30px;
+        }
+        /* 
+        &.active,
+        &:hover {
+          background: rgba(0, 148, 54, 0.294);
+        } */
+
+        &.active {
+          color: #ffffff;
+        }
+      }
+    }
   }
 }

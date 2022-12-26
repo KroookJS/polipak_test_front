@@ -11,12 +11,18 @@ export const Search: React.FC<SearchProps> = ({ search, setSearch }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const onClickClear = () => {
-    setValue("");
+    setSearch("");
     inputRef.current?.focus();
-    
   };
+  /*  const updateSearchValue = React.useCallback(
+    debounce((str: string) => {
+      setValue(str)
+    }, 150),
+    [],
+  ); */
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
+    /*     updateSearchValue(event.target.value); */
   };
 
   return (
@@ -63,7 +69,7 @@ export const Search: React.FC<SearchProps> = ({ search, setSearch }) => {
         placeholder="Поиск заказов..."
       />
 
-      {value && (
+      {search && (
         <svg
           onClick={onClickClear}
           className={styles.clearIcon}

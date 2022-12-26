@@ -22,6 +22,14 @@ export const getWorkOrdersProduct = (id: string): Promise<AxiosResponse<IProduct
 export const postWorkOrdersProduct = (id: string, params: TWorkOrdersProductsParams, ): Promise<AxiosResponse<IProductsProps[]>> => {
     return axios.post(urls.workOrdersProducts.getWorkOrdersProducts(id), params)
 } 
+export const getWorkOrdersSearch = (searchStr: string): Promise<AxiosResponse<IWorkOrdersProps>> => {
+    return axios.get(urls.workOrdersSearch.getWorkOrdersProducts(searchStr))
+} 
+export const getWorkOrdersFilterFalse = (params: TWorkOrdersParams, sortOrder: string): Promise<AxiosResponse<IWorkOrdersProps>> => {
+    return axios.get(urls.workOrdersFilterIsFinishedFalse.getWorkOrdersFilterFalse(sortOrder), {
+        params
+    })
+} 
 export const getNomenclatures = (): Promise<AxiosResponse<IGetProduct>> => {
     return axios.get(urls.nomenclatures.getNomenclatures)
 }

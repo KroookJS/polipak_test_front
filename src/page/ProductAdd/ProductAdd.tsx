@@ -1,12 +1,5 @@
-import {
-  alertClasses,
-  Box,
-  Button,
-  InputAdornment,
-  TextField,
-} from "@mui/material";
-import axios from "../../api/axios";
-import React from "react";
+import { Box, Button, InputAdornment, TextField } from "@mui/material";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./ProductAdd.module.scss";
 import { IProductsProps } from "../../type/data";
@@ -18,27 +11,30 @@ import {
 } from "../../api/workOrders/workOrders.requests";
 
 function ProductAdd() {
-  const [products, setProducts] = React.useState<IProductsProps[]>([]);
-  const [value, setValue] = React.useState("");
+  const [products, setProducts] = useState<IProductsProps[]>([]);
+  const [value, setValue] = useState("");
   const { id } = useParams();
 
   const currentId = id ? id : "";
 
-  const addProducts = async () => {
+  const addProducts = useCallback(async () => {
     try {
       await postWorkOrdersProduct(currentId, { weight: value });
+      setValue("");
     } catch (error) {
-      alert(error);
+      alert('Возникла ошибка при добавлении продукта');
+      console.log();
     }
-  };
+  }, [value]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     try {
       if (id) {
         getWorkOrdersProduct(id).then(({ data }) => setProducts(data));
       }
     } catch (error) {
-      alert(error);
+      alert('Возникла ошибка при получении продуктов');
+      
     }
   }, [addProducts]);
 

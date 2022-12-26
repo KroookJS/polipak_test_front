@@ -69,7 +69,8 @@ export default function AddWork() {
 
       navigate("/");
     } catch (error) {
-      alert("Ошибка при создании заказы!");
+      console.log(error);
+      alert("Ошибка при создании заказа!");
     }
   };
 
@@ -89,11 +90,13 @@ export default function AddWork() {
             <h4>Номер: в</h4>
           </div>
           <TextField
+            error={!number ? true : false}
+            variant="filled"
             value={number}
             onChange={(e) => setNumber(e.target.value)}
             id="outlined-basic"
             label="Номер"
-            variant="outlined"
+            /* variant="outlined" */
           />
         </div>
         <div className={styles.container}>
