@@ -29,21 +29,26 @@ h3 {
   padding: 10px;
 }
 button {
-  max-width: 300px;
+  max-width: 250px;
   margin: 15px 0;
   border: none;
   padding: 20px;
   font-size: 20px;
-  font-weight: 500;
-  border-radius: 20px;
-  background: #cff8de8c;
-  box-shadow: 3px 3px 10px #ffffff;
+  font-weight: 400;
+  border-radius: 30px;
+  background: #cfded58c;
+  box-shadow: 3px 3px 10px #9f8aa971;
   color: #000000;
   transition: 0.2s ease-in;
 }
 button:hover {
-  background: #a7efc18c;
-  box-shadow: 6px 6px 10px #e6bac1;
+  background: #9ad4ae68;
+  box-shadow: 6px 4px 10px #c9bae69f;
+  color: #434040;
+  font-weight: 500;
+}
+button:active {
+  border: 1px solid #58ca8068;
 }
 .top__block {
   display: flex;
